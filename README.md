@@ -1,1 +1,1 @@
-# JS-Tetris
+# JS-Games
