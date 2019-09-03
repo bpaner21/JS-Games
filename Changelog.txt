@@ -1,0 +1,11 @@
+Tuesday 9/3/2019, 5:45 PM
+-
+
+Finished creating a grid that can toggle rendering a Debug mode.
+
+Established basic functions and techniques for populating Field with Squares for future game Blocks.
+
+Both Grid and Blocks can change scale depnding on Size variable. In the future, add a function to change Size dynamically to scale with the dimensions of the screen rendering the app.
+
+---
+
