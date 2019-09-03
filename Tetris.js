@@ -90,6 +90,4 @@ const Square = class{
             }
         }
     } //*/
-
-
 }
