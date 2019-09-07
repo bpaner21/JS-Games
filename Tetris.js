@@ -32,8 +32,17 @@ let sizePointOne = (size * 0.15);
 let sizePointTwo = (size * 0.3);
 let sizeFill = size - sizePointTwo;
 
+let random = 0;
+
+let numColumn = 10;
+let numRow = 22;
+
+if (debug) {
+    numColumn = Math.round(window.innerWidth / size) - 2;
+}
+
 // The distance from the screen edge in pixels
-const offset = size * 2; 
+let offset = size * 2; 
 
 // The basic square that defines the grid, tetris blocks
 const Square = class{
@@ -48,12 +57,45 @@ const Square = class{
 let Grid = [];
 
 // Setup
-DrawGrid = function() {
-    context.fillStyle = '#AAAAAA';
+let Resize = function() {
+    context.canvas.width = window.innerWidth;
+    context.canvas.height = window.innerHeight;
+    
+    // if window is taller than it is wide
+    // crap version
+    // change condition so it only resizes when the window width is less than the app width
+    if (window.innerHeight >= window.innerWidth && window.innerWidth < (size * 14)) {
+        size = window.innerWidth / 14;
+    }
+    else {
+        size = window.innerHeight / 23;
+    }
+
+    sizePointOne = (size * 0.15);
+    sizePointTwo = (size * 0.3);
+    sizeFill = size - sizePointTwo;
+
+    if (debug) {
+        numColumn = Math.round(window.innerWidth / size) - 2;
+    }
+
+    // The distance from the screen edge in pixels
+    offset = size * 2; 
+
+    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+
+    DrawGrid();
+}
+
+window.addEventListener('resize', Resize);
+
+
+let DrawGrid = function() {
+    context.fillStyle = '#CCCCCC';
     context.fillRect(0,0, context.canvas.width, context.canvas.height);
 
     // Create the playing grid
-    for (let x = 0; x < 10; ++x){
+    for (let x = 0; x < numColumn; ++x){
         Grid[x] = [];
         for (let y = 0; y < 22; ++y){
             Grid[x][y] = new Square(false, "#FF00FF", offset + (x * size), (y * size));
@@ -103,7 +145,7 @@ DrawGrid = function() {
 // Create squares
 // move fill to if-statement for actual rendering function
 let DrawAllSquares = function() {
-    for (let x = 0; x < 10; ++x){
+    for (let x = 0; x < numColumn; ++x){
         if (!debug) {
             for (let y = 0; y < 22; ++y){
                 Grid[x][y].fill = true;
@@ -121,10 +163,8 @@ let DrawAllSquares = function() {
     } //*/
 }
 
-let random = 0;
-
 let DrawRandomSquares = function() {
-    for (let x = 0; x < 10; ++ x) {
+    for (let x = 0; x < numColumn; ++ x) {
         for (let y = 0; y < 22; ++y) {
             random = Math.floor(Math.random() * 2);
 
@@ -168,21 +208,31 @@ let DrawRandomSquares = function() {
     }
 }
 
+let RedrawSquares = function() {
+    
+}
+
 let step = 0;
 
-Draw = function() {
+let Draw = function() {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-
-    console.log(step);
-    ++step;
 
     DrawGrid();
     //DrawAllSquares();
     DrawRandomSquares();
 }
 
-let Game = function() {
-    requestAnimationFrame(Draw);
+let Render = function() {
+    console.log(step);
+    ++step;
+
+    if (step > 15) {
+        step = 0;
+        
+        Draw();
+    }
+
+    requestAnimationFrame(Render);
 }
 
-let Render = window.setInterval(Game, 500);
+Render();

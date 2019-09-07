@@ -9,3 +9,19 @@ Both Grid and Blocks can change scale depnding on Size variable. In the future, 
 
 ---
 
+Saturday 9/7/19, 5:40 PM
+-
+
+App now scales dynamically with the dimensions of the window using an event listener. The problem is that However, re-drawing the canvas while changing causes a weird stilted look as though the program is skipping.
+
+The program now has a render loop so that it changes every time a new animation frame is requested.
+
+A color scheme has been added to the app so that the eventual Tetris pieces will be properly differentiated from one another.
+
+Goals for the next update: 
+
+* Create a way to spawn pieces
+
+* Add controls to move pieces left/ right and to rotate them
+
+* Create a system so that pieces move down automatically, persist after they finish dropping
