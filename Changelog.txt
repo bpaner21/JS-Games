@@ -5,7 +5,7 @@ Finished creating a grid that can toggle rendering a Debug mode.
 
 Established basic functions and techniques for populating Field with Squares for future game Blocks.
 
-Both Grid and Blocks can change scale depnding on Size variable. In the future, add a function to change Size dynamically to scale with the dimensions of the screen rendering the app.
+Both Grid and Blocks can change scale depending on Size variable. In the future, add a function to change Size dynamically to scale with the dimensions of the screen rendering the app.
 
 ---
 
@@ -18,7 +18,7 @@ The program now has a render loop so that it changes every time a new animation 
 
 A color scheme has been added to the app so that the eventual Tetris pieces will be properly differentiated from one another.
 
-Goals for the next update: 
+Goals for the next update:
 
 * Create a way to spawn pieces
 
