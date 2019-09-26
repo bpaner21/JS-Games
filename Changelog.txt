@@ -12,7 +12,7 @@ Both Grid and Blocks can change scale depending on Size variable. In the future,
 Saturday 9/7/19, 5:40 PM
 -
 
-App now scales dynamically with the dimensions of the window using an event listener. The problem is that However, re-drawing the canvas while changing causes a weird stilted look as though the program is skipping.
+App now scales dynamically with the dimensions of the window using an event listener. The problem is, however, that re-drawing the canvas while changing causes a weird stilted look as though the program is skipping.
 
 The program now has a render loop so that it changes every time a new animation frame is requested.
 
@@ -25,3 +25,25 @@ Goals for the next update:
 * Add controls to move pieces left/ right and to rotate them
 
 * Create a system so that pieces move down automatically, persist after they finish dropping
+
+---
+
+Wednesday 9/25/19 10:00 PM
+-
+
+Can now spawn a line piece with the ability to move left/ right and rotate
+
+Added a check the program so that a piece stays within the bounds of the grid even after rotating.
+
+The rotation check however uses a while-loop that always does one too many iterations. Not a big issue to work around, but it does irritate my sense of programming aesthetics.
+
+Goals for next update:
+
+* Automatically move pieces down
+
+* Have pieces stay in place once they collide with a piece and are able to populate unoccupied spaces on the grid
+
+* Spawn a new piece once the previous have been set in the grid
+
+---
+

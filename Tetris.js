@@ -105,12 +105,12 @@ window.addEventListener('keyup', function(event) {
 window.addEventListener('keydown', function(event) {
     switch(event.keyCode) {
         case 37: //
-            if (Piece[3].x > 0) {
+            if (Piece.every(Piece => Piece['x'] > 0)) {
                 PieceX(-1);
             }
             break;
         case 39: // Right
-            if (Piece[3].x < 9) {
+            if (Piece.every(Piece => Piece['x'] < 9)) {
                 PieceX(1);
             }
             break;
@@ -235,14 +235,61 @@ let RotatePiece = function() {
 
         console.debug("2. [" + i + "]: " + Piece[i].x + ", " + Piece[i].y);
 
-        Piece[i].x = px + (a * costTheta) - (b * sinTheta);
-        Piece[i].y = py + (a * sinTheta) + (b * costTheta);
+        Piece[i].x = Math.round(px + (a * costTheta) - (b * sinTheta));
+        Piece[i].y = Math.round(py + (a * sinTheta) + (b * costTheta));
 
         console.debug("3. [" + i + "]: " + Piece[i].x + ", " + Piece[i].y);
 
     }
 
+    XShift(Piece);
+}
 
+
+// This function checks if, after rotating a piece, any of its squares are outside the horizontal bounds of the grid.
+// If so, it shifts the pieces' X values until they are back within the bounds of the grid.
+// 
+// For some reason the while (!bound) loop does one too many iterations
+// Until I can isolate the cause, [Piece.forEach(Piece => Piece['x'] -= shift)] will serve as a workaround
+// 
+let XShift = function (Piece) {
+    // if every square of the Piece is within the horizontal bounds of the grid, it simply returns
+    if (Piece.every(Piece => Piece['x'] > 0) && Piece.every(Piece => Piece['x'] < 9)) {
+        return;
+    }
+    else {
+        // The ternary checks if the piece needs to be shifted left or right
+        let shift = Piece.some(Piece => Piece['x'] < 0) ? 1 : -1;
+
+        let bound = false;
+
+        // This loop shifts each square on the piece by one space
+        // Then checks if all the squares are in bounds
+        // If not, then repeat
+        while (!bound) {
+            Piece.forEach(Piece => Piece['x'] += shift);
+
+            if (shift === 1) {
+                if (Piece.every(Piece => Piece['x'] > 0)) {
+                    bound = true;
+                    console.debug(Piece.every(Piece => Piece['x'] > 0));
+                }
+                //console.log("Shift X + 1");
+                
+            }
+            else {
+                if (Piece.every(Piece => Piece['x'] < 9)) {
+                    bound = true;
+                    console.debug(Piece.every(Piece => Piece['x'] < 9));
+                }
+                //console.log("Shift X - 1");
+            }
+        }
+
+        // The above while-loop iterates one too many times
+        // This serves as a workaround
+        Piece.forEach(Piece => Piece['x'] -= shift);
+    } 
 }
 
 // Draw functions
