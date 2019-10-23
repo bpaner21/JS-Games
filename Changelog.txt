@@ -47,3 +47,39 @@ Goals for next update:
 
 ---
 
+Wednesday 10/23/19 9:25 AM
+-
+
+The rotation check no longer does an extra iteration.
+
+The piece now moves down automatically
+
+A function to set a piece in place in unoccupied spaces of the grid was added
+
+A new function was added to clear full rows
+
+A 3-dimensional array was created to contain the starting positions of the pieces' individual squares
+
+The app was cleaned up to exclude dead code and irrelavent comments
+
+* The draw squares functions were kept because they are still useful for debugging
+
+For-loops have replaced forEach() statements because they are less costly
+
+The CreatePiece() function was changed in preparation of spawning new pieces
+
+-
+
+Known bugs:
+
+When a piece rotates, there is a chance of it clipping into a filled space on the grid
+
+-
+
+Goals for next update:
+
+Implement piece array in the CreatePiece() function to test new pieces
+
+Change the piece array and rotation function so that the axis of rotation is [0] instead of [2]
+
+Figure out where in the piece rotation function the clipping issue is happening
